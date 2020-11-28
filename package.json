@@ -1,0 +1,22 @@
+{
+  "name": "refactoring",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wtlin1228/refactoring.git"
+  },
+  "author": "Wei-Tang Lin <wtlin1228@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wtlin1228/refactoring/issues"
+  },
+  "homepage": "https://github.com/wtlin1228/refactoring#readme",
+  "devDependencies": {
+    "jest": "26.6.3"
+  }
+}
