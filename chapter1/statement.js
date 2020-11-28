@@ -9,13 +9,7 @@ function statement(invoice, plays) {
   }).format;
 
   for (let perf of invoice.performances) {
-    // 加入 volume credit
-    volumeCredits += Math.max(perf.audience - 30, 0);
-    // 每十名喜劇觀眾可獲得額外點數
-    if ("comedy" === playFor(perf).type) {
-      volumeCredits += Math.floor(perf.audience / 5);
-    }
-
+    volumeCredits += volumeCreditsFor(perf);
     // 印出這份訂單
     result += `${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${
       perf.audience
@@ -55,6 +49,18 @@ function statement(invoice, plays) {
 
   function playFor(aPerformance) {
     return plays[aPerformance.playID];
+  }
+
+  function volumeCreditsFor(aPerformance) {
+    let result = 0;
+
+    result += Math.max(aPerformance.audience - 30, 0);
+
+    if ("comedy" === playFor(aPerformance).type) {
+      result += Math.floor(aPerformance.audience / 5);
+    }
+
+    return result;
   }
 }
 
