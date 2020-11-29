@@ -1,4 +1,7 @@
-const { PerformanceCalculator } = require("./performanceCalculator");
+const {
+  TragedyCalculator,
+  ComedyCalculator,
+} = require("./performanceCalculator");
 
 function createStatementData(invoice, plays) {
   const result = {};
@@ -22,7 +25,7 @@ function totalVolumeCredits(data) {
 }
 
 function enrichPerformance(aPerformance, plays) {
-  const calculator = new PerformanceCalculator(
+  const calculator = createPerformanceCalculator(
     aPerformance,
     playFor(aPerformance, plays)
   );
@@ -34,6 +37,17 @@ function enrichPerformance(aPerformance, plays) {
   result.volumeCredits = calculator.volumeCredits;
 
   return result;
+}
+
+function createPerformanceCalculator(aPerformance, aPlay) {
+  switch (aPlay.type) {
+    case "tragedy":
+      return new TragedyCalculator(aPerformance, aPlay);
+    case "comedy":
+      return new ComedyCalculator(aPerformance, aPlay);
+    default:
+      throw new Error(`unknown type: ${aPlay.type}`);
+  }
 }
 
 function playFor(aPerformance, plays) {
